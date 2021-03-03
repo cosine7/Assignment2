@@ -1,0 +1,1 @@
+mongodb+srv://admin:Lcx1030db@cluster0.gjmge.mongodb.net/Cluster0?retryWrites=true&w=majority
