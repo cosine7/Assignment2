@@ -103,5 +103,8 @@ dist
 # TernJS port file
 .tern-port
 
-# Web Storm
+# Webstorm
 .idea/
+
+# Mongodb connection link
+mongodbURL.txt
