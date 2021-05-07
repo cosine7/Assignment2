@@ -3,24 +3,21 @@ const BodyParser = require('body-parser');
 const Mongoose = require('mongoose');
 
 const app = Express();
-const mongodbURL = require('fs');
-const product = require('./routes/product.routes');
-const user = require('./routes/user.routes');
+const user = require('./models/user.model');
+const product = require('./models/product.model');
+const router = require('./routes/routes');
 
 app.use(BodyParser.json());
-app.use(product);
-app.use(user);
+app.use('/product', router.new(product, 'sku'));
+app.use('/user', router.new(user, 'ssn'));
+require('dotenv').config();
 
-mongodbURL.readFile('mongodbURL.txt', (err, data) => {
-  if (err) throw err;
-
-  (async () => {
-    await Mongoose.connect(data.toString(), {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-      useCreateIndex: true,
-    });
-    app.listen(8000);
-  })();
-});
+(async () => {
+  await Mongoose.connect(process.env.MONGODB_CONNECTION_LINK, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  });
+  app.listen(8000);
+})();

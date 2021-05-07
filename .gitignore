@@ -106,5 +106,5 @@ dist
 # Webstorm
 .idea/
 
-# Mongodb connection link
-mongodbURL.txt
+# .env
+.env
